@@ -37,7 +37,8 @@
                     <i class="fa-brands fa-facebook"></i>
                 </div>
                 <p>o usa tu email para registrarte</p>
-                <form class="form form-register" novalidate>
+                <form class="form form-register" method="post" action="{% url 'register_user' %}">
+                    {% csrf_token %}
                     <div>
                         <label>
                             <i class='bx bx-user' ></i>
@@ -104,7 +105,5 @@
         </div>
     </div>
     <script src="/ecommerce/tienda/static/script-login2.js"></script>
-    <script src="js/register.js"></script>
-    <script src="js/login.js"></script>
 </body>
 </html>

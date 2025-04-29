@@ -26,4 +26,6 @@ urlpatterns = [
     path('', views.index, name='index'),  # Ruta para el index
     path('login2/', views.login_view, name='login2'),  # Ruta para el login
     path('redirigir_a_login/', views.redirigir_a_login, name='redirigir_a_login'),  # Ruta para redirigir al login
+    path('registro/', views.register_user, name='register_user'),
+
 ]
