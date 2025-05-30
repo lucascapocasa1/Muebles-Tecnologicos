@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'stylelogin2.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>FORMULARIO DE REGISTRO E INICIO SESIÓN</title>
+</head>
+<body>
+    <!-- Mostrar mensajes de Django - Versión Mejorada -->
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <!-- Icono según el tipo de mensaje -->
+                    {% if message.tags == 'success' %}
+                        <i class='bx bx-check-circle alert-icon'></i>
+                    {% elif message.tags == 'error' %}
+                        <i class='bx bx-error-circle alert-icon'></i>
+                    {% elif message.tags == 'warning' %}
+                        <i class='bx bx-error alert-icon'></i>
+                    {% else %}
+                        <i class='bx bx-info-circle alert-icon'></i>
+                    {% endif %}
+                    
+                    <!-- Contenido del mensaje -->
+                    <div class="alert-content">{{ message }}</div>
+                    
+                    <!-- Botón de cerrar mejorado -->
+                    <button type="button" class="close-alert">
+                        <i class='bx bx-x'></i>
+                    </button>
+                    
+                    <!-- Barra de progreso -->
+                    <div class="alert-progress"></div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <div class="container-form register {% if not show_register %}hide{% endif %}">
+        <div class="information">
+            <div class="info-childs">
+                <h2>Bienvenido</h2>
+                <p>Si ya tienes cuenta, inicia sesión con tus datos</p>
+                <input type="button" value="Iniciar Sesión" id="sign-in">
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Crear una Cuenta</h2>
+                <div class="icons">
+                    <i class="fa-brands fa-google"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-facebook"></i>
+                </div>
+                <p>o usa tu email para registrarte</p>
+                <form class="form form-register" method="post" action="{% url 'register_user' %}">
+                    {% csrf_token %}
+                    <div>
+                        <label>
+                            <i class='bx bx-user'></i>
+                            <input type="text" placeholder="Nombre de usuario" name="username" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <i class='bx bx-envelope'></i>
+                            <input type="email" placeholder="Correo electrónico" name="email" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <i class='bx bx-lock-alt'></i>
+                            <input type="password" placeholder="Contraseña" name="password1" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <i class='bx bx-lock-alt'></i>
+                            <input type="password" placeholder="Confirmar contraseña" name="password2" required>
+                        </label>
+                    </div>
+                    <input type="submit" value="Registrarse">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMULARIO DE LOGIN -->
+    <div class="container-form login {% if show_register %}hide{% endif %}">
+        <div class="information">
+            <div class="info-childs">
+                <h2>Bienvenido</h2>
+                <p>Si aún no tienes cuenta, haz click en el botón de abajo.</p>
+                <input type="button" value="Registrarse" id="sign-up">
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Iniciar Sesión</h2>
+                <div class="icons">
+                    <i class="fa-brands fa-google"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-facebook"></i>
+                </div>
+                <p>o Iniciar Sesión con una cuenta</p>
+                <form class="form form-login" method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div>
+                        <label>
+                            <i class='bx bx-envelope'></i>
+                            <input type="text" placeholder="Nombre de usuario" name="username" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <i class='bx bx-lock-alt'></i>
+                            <input type="password" placeholder="Contraseña" name="password" required>
+                        </label>
+                    </div>
+                    <input type="submit" value="Iniciar Sesión">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'script-login2.js' %}"></script>
+</body>
+</html>
