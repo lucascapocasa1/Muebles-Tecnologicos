@@ -8,6 +8,7 @@ btnSignIn.addEventListener("click", e => {
     containerFormLogin.classList.remove("hide")
 })
 
+<<<<<<< HEAD
 btnSignUp.addEventListener("click", e => {
     containerFormLogin.classList.add("hide");
     containerFormRegister.classList.remove("hide")
@@ -43,3 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+=======
+
+btnSignUp.addEventListener("click", e => {
+    containerFormLogin.classList.add("hide");
+    containerFormRegister.classList.remove("hide")
+})
+>>>>>>> 6abf4e510230dd695792f13b9c05ae29a256dd2d
