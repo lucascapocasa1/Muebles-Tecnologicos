@@ -14,7 +14,7 @@
     <title>FORMULARIO DE REGISTRO E INICIO SESIÓN</title>
 </head>
 <body>
-    <!-- Mostrar mensajes de Django - Versión Mejorada -->
+    <!-- Mostrar mensajes de Django -->
     {% if messages %}
         <div class="messages-container">
             {% for message in messages %}
@@ -33,7 +33,7 @@
                     <!-- Contenido del mensaje -->
                     <div class="alert-content">{{ message }}</div>
                     
-                    <!-- Botón de cerrar mejorado -->
+                    <!-- Botón de cerrar -->
                     <button type="button" class="close-alert">
                         <i class='bx bx-x'></i>
                     </button>
@@ -45,58 +45,121 @@
         </div>
     {% endif %}
 
-    <!-- FORMULARIO DE REGISTRO -->
-    <div class="container-form register {% if not show_register %}hide{% endif %}">
+    <!-- SELECCIÓN DE TIPO DE CUENTA -->
+    <div class="container-form account-type-selector" id="accountTypeSelector">
         <div class="information">
             <div class="info-childs">
-                <h2>Bienvenido</h2>
-                <p>Si ya tienes cuenta, inicia sesión con tus datos</p>
-                <input type="button" value="Iniciar Sesión" id="sign-in">
+                <h2>¡Bienvenido!</h2>
+                <p>Selecciona el tipo de cuenta que deseas crear</p>
             </div>
         </div>
         <div class="form-information">
             <div class="form-information-childs">
-                <h2>Crear una Cuenta</h2>
-                <div class="icons">
-                    <i class="fa-brands fa-google"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-facebook"></i>
-                </div>
-                <p>o usa tu email para registrarte</p>
-                <form class="form form-register" method="post" action="{% url 'register_user' %}">
-                    {% csrf_token %}
-                    <div>
-                        <label>
+                <h2>Tipo de Cuenta</h2>
+                <p>Elige la opción que mejor describa tu perfil</p>
+                
+                <div class="account-type-options">
+                    <div class="account-option" data-type="user">
+                        <div class="option-icon">
                             <i class='bx bx-user'></i>
-                            <input type="text" placeholder="Nombre de usuario" name="username" required>
-                        </label>
+                        </div>
+                        <div class="option-content">
+                            <h3>Usuario</h3>
+                        </div>
+                        <div class="option-arrow">
+                            <i class='bx bx-chevron-right'></i>
+                        </div>
                     </div>
-                    <div>
-                        <label>
-                            <i class='bx bx-envelope'></i>
-                            <input type="email" placeholder="Correo electrónico" name="email" required>
-                        </label>
+                    
+                    <div class="account-option" data-type="company">
+                        <div class="option-icon">
+                            <i class='bx bx-buildings'></i>
+                        </div>
+                        <div class="option-content">
+                            <h3>Empresa</h3>
+                        </div>
+                        <div class="option-arrow">
+                            <i class='bx bx-chevron-right'></i>
+                        </div>
                     </div>
-                    <div>
-                        <label>
-                            <i class='bx bx-lock-alt'></i>
-                            <input type="password" placeholder="Contraseña" name="password1" required>
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <i class='bx bx-lock-alt'></i>
-                            <input type="password" placeholder="Confirmar contraseña" name="password2" required>
-                        </label>
-                    </div>
-                    <input type="submit" value="Registrarse">
-                </form>
+                </div>
+                
+                <div class="back-to-login">
+                    <p>¿Ya tenés cuenta? <a href="#" id="goToLogin">Inicia sesión aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <div class="container-form register hide" id="registerForm">
+    <div class="information">
+        <div class="info-childs">
+            <h2>Bienvenido</h2>
+            <p>Si ya tenés cuenta, inicia sesión con tus datos</p>
+            <input type="button" value="Iniciar Sesión" id="sign-in">
+        </div>
+    </div>
+    <div class="form-information">
+        <div class="form-information-childs">
+            <h2 id="registerTitle">Crear Cuenta de Usuario</h2>
+            <div class="selected-type-info" id="selectedTypeInfo">
+                <div class="type-badge">
+                    <i class='bx bx-user' id="typeBadgeIcon"></i>
+                    <span id="typeBadgeText">Usuario</span>
+                </div>
+                <button type="button" class="change-type-btn" id="changeTypeBtn">
+                    <i class='bx bx-edit'></i>
+                    Cambiar
+                </button>
+            </div>
+            
+            <div class="icons">
+                <i class="fa-brands fa-google"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+            </div>
+            <p>o usa tu email para registrarte</p>
+            <form class="form form-register" method="post" action="{% url 'register_user' %}">
+                {% csrf_token %}
+                <input type="hidden" name="user_type" id="hiddenUserType" value="user">
+                
+                <!-- Campo que cambia según el tipo -->
+                <div>
+                    <label id="usernameLabel">
+                        <i class='bx bx-user' id="usernameIcon"></i>
+                        <input type="text" placeholder="Nombre de usuario" name="username" id="usernameInput" required>
+                    </label>
+                </div>
+                
+                <div>
+                    <label>
+                        <i class='bx bx-envelope'></i>
+                        <input type="email" placeholder="Correo electrónico" name="email" required>
+                    </label>
+                </div>
+                
+                <div>
+                    <label>
+                        <i class='bx bx-lock-alt'></i>
+                        <input type="password" placeholder="Contraseña" name="password1" required>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <i class='bx bx-lock-alt'></i>
+                        <input type="password" placeholder="Confirmar contraseña" name="password2" required>
+                    </label>
+                </div>
+                
+                <input type="submit" value="Registrarse" id="submitBtn">
+            </form>
             </div>
         </div>
     </div>
 
     <!-- FORMULARIO DE LOGIN -->
-    <div class="container-form login {% if show_register %}hide{% endif %}">
+    <div class="container-form login hide" id="loginForm">
         <div class="information">
             <div class="info-childs">
                 <h2>Bienvenido</h2>
@@ -118,7 +181,7 @@
                     <div>
                         <label>
                             <i class='bx bx-envelope'></i>
-                            <input type="text" placeholder="Nombre de usuario" name="username" required>
+                            <input type="text" placeholder="Nombre de usuario o empresa" name="username" required>
                         </label>
                     </div>
                     <div>

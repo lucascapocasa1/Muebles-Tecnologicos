@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .forms import CustomUserCreationForm
 
 def index(request):
@@ -24,9 +24,19 @@ def register_user(request):
             # Crear el usuario
             user = form.save()
             username = form.cleaned_data.get('username')
+            user_type = form.cleaned_data.get('user_type')
+            
+            # NUEVO: Asignar al grupo correspondiente
+            if user_type == 'company':
+                group, created = Group.objects.get_or_create(name='Empresas')
+                user.groups.add(group)
+            else:
+                group, created = Group.objects.get_or_create(name='Usuarios')
+                user.groups.add(group)
             
             # Agregar mensaje de éxito
-            messages.success(request, f'¡Cuenta creada exitosamente para {username}!')
+            tipo_texto = "Empresa" if user_type == 'company' else "Usuario"
+            messages.success(request, f'¡Cuenta de {tipo_texto} creada exitosamente para {username}!')
             
             # Redirigir al login
             return redirect('login2')
@@ -50,10 +60,30 @@ def custom_login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, f'¡Bienvenido, {username}!')
-            return redirect('index')  # Redirigir al index
+            
+            # NUEVO: Verificar tipo de usuario y redirigir apropiadamente
+            if user.groups.filter(name='Empresas').exists():
+                messages.success(request, f'¡Bienvenido, {username}! (Cuenta de Empresa)')
+                # Aquí puedes redirigir a una página específica para empresas
+                return redirect('index')  # Por ahora al index
+            else:
+                messages.success(request, f'¡Bienvenido, {username}! (Cuenta de Usuario)')
+                # Aquí puedes redirigir a una página específica para usuarios
+                return redirect('index')  # Por ahora al index
         else:
             messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
             return render(request, 'tienda/login2.html', {'show_login': True})
     
     return render(request, 'tienda/login2.html')
+
+# NUEVO: Función auxiliar para usar en otras vistas
+def is_company(user):
+    """Verifica si el usuario es una empresa"""
+    return user.groups.filter(name='Empresas').exists()
+
+def is_regular_user(user):
+    """Verifica si el usuario es un usuario regular"""
+    return user.groups.filter(name='Usuarios').exists()
+
+def subasta(request):
+    return render(request, 'tienda/subasta/subasta.html')

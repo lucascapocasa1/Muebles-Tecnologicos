@@ -1,0 +1,415 @@
+/* ========== ESTILOS GENERALES SUBASTA ========== */
+.contenedor-subasta {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* ========== NAVEGACIÓN DE SUBASTA ========== */
+.subasta-nav {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  padding: 15px 0;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.subasta-nav h1 {
+  color: white;
+  text-align: center;
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.btn-nav {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-nav:hover {
+  background-color: white;
+  color: #28a745;
+}
+
+.btn-nav.active {
+  background-color: white;
+  color: #28a745;
+}
+
+/* ========== SECCIÓN CREAR SUBASTA (COMPRADOR) ========== */
+.crear-subasta {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.crear-subasta h2 {
+  color: #28a745;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  border-bottom: 3px solid #28a745;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #28a745;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.upload-area {
+  border: 2px dashed #28a745;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-area:hover {
+  background-color: #e9ecef;
+}
+
+.upload-area i {
+  font-size: 3rem;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+/* ========== LISTA DE SUBASTAS ACTIVAS ========== */
+.subastas-activas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.tarjeta-subasta {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-subasta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.imagen-producto {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #f0f0f0;
+}
+
+.info-producto {
+  padding: 20px;
+}
+
+.info-producto h3 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.info-producto p {
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.rango-precio {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.tiempo-restante {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.estado-subasta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.ofertas-count {
+  background-color: #e9ecef;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+/* ========== SECCIÓN OFERTAR (EMPRESA) ========== */
+.ofertar-section {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.ofertar-section h3 {
+  color: #28a745;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.oferta-actual {
+  background: linear-gradient(135deg, #17a2b8, #138496);
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.input-oferta {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.input-oferta input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.btn-ofertar {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-ofertar:hover {
+  transform: translateY(-2px);
+}
+
+.btn-ofertar:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== HISTORIAL DE OFERTAS ========== */
+.historial-ofertas {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.historial-ofertas h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.lista-ofertas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.oferta-item {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #28a745;
+}
+
+.oferta-item:first-child {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  border-left-color: #155724;
+}
+
+.oferta-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.empresa-nombre {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.oferta-tiempo {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.oferta-precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* ========== MENSAJES DE ESTADO ========== */
+.mensaje {
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+.mensaje.exito {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.mensaje.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.mensaje.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+/* ========== BOTONES GENERALES ========== */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #545b62;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .contenedor-subasta {
+    padding: 15px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .nav-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .input-oferta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .subastas-activas {
+    grid-template-columns: 1fr;
+  }
+  
+  .estado-subasta {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
