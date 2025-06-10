@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     """Vista para la página principal"""
@@ -26,7 +27,7 @@ def register_user(request):
             username = form.cleaned_data.get('username')
             user_type = form.cleaned_data.get('user_type')
             
-            # NUEVO: Asignar al grupo correspondiente
+            # Asignar al grupo correspondiente
             if user_type == 'company':
                 group, created = Group.objects.get_or_create(name='Empresas')
                 user.groups.add(group)
@@ -85,5 +86,21 @@ def is_regular_user(user):
     """Verifica si el usuario es un usuario regular"""
     return user.groups.filter(name='Usuarios').exists()
 
+# Vistas para subasta según tipo de usuario
+@login_required
 def subasta(request):
-    return render(request, 'tienda/subasta/subasta.html')
+    if is_company(request.user):
+        return redirect('subasta_empresa')
+    elif is_regular_user(request.user):
+        return redirect('subasta_usuario')
+    else:
+        messages.error(request, "No tenés permiso para acceder a la subasta.")
+        return redirect('index')
+
+@login_required
+def subasta_empresa(request):
+    return render(request, 'tienda/subasta/subasta-empresa.html')
+
+@login_required
+def subasta_usuario(request):
+    return render(request, 'tienda/subasta/subasta-usuario.html')

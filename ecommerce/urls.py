@@ -26,7 +26,9 @@ urlpatterns = [
     path('login2/', views.login_view, name='login2'),  # Formulario de login/registro
     path('redirigir_a_login/', views.redirigir_a_login, name='redirigir_a_login'),
     path('registro/', views.register_user, name='register_user'),  # Registro de usuarios
-    path('subasta/', views.subasta, name='subasta'),
+    path('subasta/', views.subasta, name='subasta'),  # Vista que redirige según grupo
+    path('subasta/empresa/', views.subasta_empresa, name='subasta_empresa'),  # Vista empresa
+    path('subasta/usuario/', views.subasta_usuario, name='subasta_usuario'),  # Vista usuario
     # Vista personalizada de login que redirige correctamente
     path('login/', views.custom_login_view, name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),

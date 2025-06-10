@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Usuario - Mis Pedidos</title>
+  <link rel="stylesheet" href="{% static 'subasta.css' %}" />
+</head>
+<body>
+
+  <!-- Encabezado del comprador -->
+  <header class="empresa-header">
+    <div class="container">
+      <h1 class="empresa-titulo">📦 Mis Pedidos</h1>
+      <p class="empresa-subtitulo">Revisá ofertas y gestioná tus subastas</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Botón para crear nueva subasta -->
+      <section class="create-auction-section">
+        <div class="create-auction-card">
+          <div class="create-auction-content">
+            <h3>¿Necesitás algo nuevo?</h3>
+            <p>Creá una subasta y recibí ofertas de múltiples proveedores</p>
+            <button class="create-auction-btn" onclick="abrirModalCrearSubasta()">
+              ➕ Crear Nueva Subasta
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección de mis subastas activas -->
+      <section class="auction-requests">
+        <div class="section-header">
+          <h3>Mis Subastas Activas</h3>
+          <span class="requests-count" id="myAuctionsCount">0 subastas activas</span>
+        </div>
+
+        <div class="requests-grid" id="myAuctionsGrid">
+          <!-- Las subastas creadas aparecerán aquí -->
+        </div>
+      </section>
+
+      <!-- Panel de ofertas recibidas -->
+      <section class="my-bids-section" id="offersPanel" style="display: none;">
+        <div class="section-header">
+          <h3>Ofertas Recibidas</h3>
+          <button class="toggle-btn" onclick="cerrarPanelOfertas()">Cerrar</button>
+        </div>
+        <div class="my-bids-container" id="offersContainer">
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Modal para crear subasta -->
+  <div id="createAuctionModal" class="modal">
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3>Crear Nueva Subasta</h3>
+        <span class="close" onclick="cerrarModalCrearSubasta()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="createAuctionForm">
+          <div class="form-group">
+            <label for="productTitle">Título del Producto *</label>
+            <input type="text" id="productTitle" name="productTitle" required 
+                   placeholder="Ej: Estantería Industrial, Mesa de Comedor...">
+          </div>
+          
+          <div class="form-group">
+            <label for="productDescription">Descripción Detallada *</label>
+            <textarea id="productDescription" name="productDescription" rows="4" required
+                      placeholder="Describí en detalle lo que necesitás: materiales, acabados, características especiales..."></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="productDimensions">Dimensiones</label>
+              <input type="text" id="productDimensions" name="productDimensions" 
+                     placeholder="Ej: 200x180x40cm">
+            </div>
+            <div class="form-group">
+              <label for="productColor">Color/Acabado</label>
+              <input type="text" id="productColor" name="productColor" 
+                     placeholder="Ej: Negro mate, Madera natural...">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="minPrice">Precio Mínimo ($) *</label>
+              <input type="number" id="minPrice" name="minPrice" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="maxPrice">Precio Máximo ($) *</label>
+              <input type="number" id="maxPrice" name="maxPrice" min="1" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="deadline">Fecha de Cierre *</label>
+              <input type="datetime-local" id="deadline" name="deadline" required>
+            </div>
+            <div class="form-group">
+              <label for="category">Categoría</label>
+              <select id="category" name="category">
+                <option value="">Seleccionar categoría</option>
+                <option value="muebles">Muebles</option>
+                <option value="decoracion">Decoración</option>
+                <option value="electrodomesticos">Electrodomésticos</option>
+                <option value="tecnologia">Tecnología</option>
+                <option value="otros">Otros</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="productImage">URL de Imagen (opcional)</label>
+            <input type="url" id="productImage" name="productImage" 
+                   placeholder="https://ejemplo.com/imagen.jpg">
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" onclick="cerrarModalCrearSubasta()">Cancelar</button>
+            <button type="submit" class="submit-btn">Crear Subasta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="notificationContainer" class="notification-container"></div>
+  <script src="{% static 'subasta.js' %}"></script>
+</body>
+</html>
