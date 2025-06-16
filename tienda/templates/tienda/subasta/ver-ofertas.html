@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ofertas - {{ subasta.product.name }}</title>
+    <link rel="stylesheet" href="{% static 'subasta.css' %}" />
+  </head>
+  <body>
+    <header class="empresa-header">
+      <div class="container">
+        <h1 class="empresa-titulo">Ofertas Recibidas</h1>
+        <p class="empresa-subtitulo">{{ subasta.product.name }}</p>
+        <div class="header-actions">
+          <a href="{% url 'subasta_usuario' %}" class="back-btn"
+            >← Volver a Mis Subastas</a
+          >
+          <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <!-- Información de la subasta -->
+        <section class="auction-info">
+          <div class="auction-card">
+            <div class="auction-header">
+              <div class="auction-id">#SUB-{{ subasta.id }}</div>
+              <div
+                class="auction-status {% if subasta.is_active %}status-open{% else %}status-closed{% endif %}"
+              >
+                {% if subasta.is_active %}Activa{% else %}Finalizada{% endif %}
+              </div>
+            </div>
+            <div class="auction-details">
+              <h3>{{ subasta.product.name }}</h3>
+              <p class="description">{{ subasta.product.description }}</p>
+              <div class="auction-specs">
+                <div class="spec-item">
+                  <span class="spec-label">Precio máximo:</span>
+                  <span class="spec-value">${{ subasta.starting_price }}</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Precio actual:</span>
+                  <span class="spec-value current-price"
+                    >${{ subasta.current_price }}</span
+                  >
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Fecha de cierre:</span>
+                  <span class="spec-value"
+                    >{{ subasta.end_time|date:"d/m/Y H:i" }}</span
+                  >
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Total de ofertas:</span>
+                  <span class="spec-value">{{ ofertas.count }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Ofertas recibidas -->
+        <section class="offers-section">
+          <h3>Ofertas Recibidas</h3>
+
+          {% if ofertas %}
+          <div class="offers-grid">
+            {% for oferta in ofertas %}
+            <div class="offer-card {% if forloop.first %}best-offer{% endif %}">
+              <div class="offer-header">
+                <div class="company-name">{{ oferta.bidder.username }}</div>
+                <div class="offer-price">${{ oferta.amount }}</div>
+                {% if forloop.first %}
+                <div class="best-badge">Mejor Oferta</div>
+                {% endif %}
+              </div>
+
+              <div class="offer-details">
+                <div class="detail-row">
+                  <span class="detail-label">🏗️ Materiales:</span>
+                  <span class="detail-value">{{ oferta.materials }}</span>
+                </div>
+
+                <div class="detail-row">
+                  <span class="detail-label">📅 Tiempo de entrega:</span>
+                  <span class="detail-value"
+                    >{{ oferta.delivery_time }} días</span
+                  >
+                </div>
+
+                <div class="detail-row">
+                  <span class="detail-label">🛡️ Garantía:</span>
+                  <span class="detail-value">{{ oferta.warranty }} meses</span>
+                </div>
+
+                {% if oferta.additional_details %}
+                <div class="detail-row">
+                  <span class="detail-label">📝 Detalles adicionales:</span>
+                  <span class="detail-value"
+                    >{{ oferta.additional_details }}</span
+                  >
+                </div>
+                {% endif %}
+
+                <div class="offer-timestamp">
+                  <small
+                    >Oferta realizada el {{ oferta.timestamp|date:"d/m/Y H:i"
+                    }}</small
+                  >
+                </div>
+              </div>
+
+              <div class="offer-actions">
+                <button
+                  class="contact-btn"
+                  onclick="contactarEmpresa('{{ oferta.bidder.username }}', {{ oferta.amount }})"
+                >
+                  💬 Contactar
+                </button>
+                {% if subasta.is_active %}
+                <button
+                  class="accept-btn"
+                  onclick="aceptarOferta({{ oferta.id }})"
+                >
+                  ✅ Aceptar Oferta
+                </button>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="no-offers">
+            <div class="no-offers-content">
+              <h4>No hay ofertas aún</h4>
+              <p>Las empresas aún no han enviado ofertas para tu subasta.</p>
+              {% if subasta.is_active %}
+              <p>
+                <strong>Tu subasta sigue activa</strong> hasta el {{
+                subasta.end_time|date:"d/m/Y H:i" }}
+              </p>
+              {% else %}
+              <p>La subasta ha finalizado sin ofertas.</p>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+        </section>
+      </div>
+    </main>
+
+    <!-- Contenedor de notificaciones -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script>
+      function contactarEmpresa(empresa, precio) {
+        mostrarNotificacion(
+          `Contactando con ${empresa} por la oferta de $${precio}`,
+          "info"
+        );
+        // Aquí podrías implementar un sistema de mensajería o redireccionar a email
+      }
+
+      function aceptarOferta(ofertaId) {
+        if (
+          confirm(
+            "¿Estás seguro de que querés aceptar esta oferta? Esta acción no se puede deshacer."
+          )
+        ) {
+          // Aquí implementarías la lógica para aceptar la oferta
+          mostrarNotificacion(
+            "Funcionalidad de aceptar oferta en desarrollo",
+            "info"
+          );
+        }
+      }
+
+      function mostrarNotificacion(mensaje, tipo = "success") {
+        const contenedor = document.getElementById("notificationContainer");
+        const noti = document.createElement("div");
+        noti.className = `notification ${tipo}`;
+        noti.textContent = mensaje;
+        contenedor.appendChild(noti);
+        setTimeout(() => {
+          if (contenedor.contains(noti)) {
+            contenedor.removeChild(noti);
+          }
+        }, 4000);
+      }
+    </script>
+  </body>
+</html>

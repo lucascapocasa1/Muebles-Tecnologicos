@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Productos</title>
+  </head>
+  <body>
+    <h1>Listado de productos</h1>
+    {% for producto in productos %}
+    <div>
+      <h3>{{ producto.nombre }}</h3>
+      <p>{{ producto.descripcion }}</p>
+      <p>Precio: {{ producto.precio }}</p>
+    </div>
+    {% endfor %}
+
+    <div>
+      <span
+        >Página {{ productos.number }} de {{ productos.paginator.num_pages
+        }}</span
+      >
+      {% if productos.has_previous %}
+      <a href="?page={{ productos.previous_page_number }}">Anterior</a>
+      {% endif %} {% if productos.has_next %}
+      <a href="?page={{ productos.next_page_number }}">Siguiente</a>
+      {% endif %}
+    </div>
+  </body>
+</html>
