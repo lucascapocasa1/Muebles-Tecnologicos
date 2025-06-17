@@ -1,0 +1,134 @@
+ body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    }
+
+header {
+
+    background: #a2cc73;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    }
+header h1 {
+
+    margin: 0;
+    color: #151515;
+}
+
+.productos-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+    
+.producto {
+
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 280px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.producto img {
+
+    width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+    max-height: 180px;
+}
+
+.producto h2 {
+
+    margin: 15px 0 10px;
+    font-size: 1.3rem;
+}
+
+.producto p {
+
+    font-size: 1rem;
+    color: #666;
+    flex-grow: 1;
+}
+
+.precio {
+
+    font-weight: bold;
+    margin: 10px 0;
+    color: #004466;
+    font-size: 1.2rem;
+}
+
+.btn-comprar {
+
+    background: #a2cc73;
+    color: black;
+    font-style: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-comprar:hover {
+
+    background: #a2cc73a9;
+}
+
+footer {
+    
+    text-align: center;
+    padding: 15px 0;
+    background: #222;
+    color: white;
+    margin-top: 40px;
+    }
+
+nav {
+
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 0px;
+  margin-left: 43%;
+}
+
+nav ul li a {
+
+  color: black;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  margin-right: 20px;
+}
+
+nav ul li a:hover {
+  color: #66c2ff;
+}

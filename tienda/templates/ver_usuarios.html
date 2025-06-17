@@ -1,0 +1,13 @@
+<h2>Usuarios registrados en Firebase</h2>
+
+{% if usuarios %}
+    <ul>
+    {% for u in usuarios %}
+        <li>
+            <strong>{{ u.username }}</strong> – {{ u.email }} ({{ u.tipo }})
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay usuarios registrados aún.</p>
+{% endif %}

@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'productos.css' %}" />
+    <title>Muebles Tecnológicos | Productos</title>
+</head>
+<body>
+  <header>
+    <h1>Muebles Tecnológicos</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="{% url 'index' %}">Inicio</a></li>
+      <li><a href="#">Productos</a></li>
+      <li><a href="#">Subastas</a></li>
+    </ul>
+  </nav>
+
+  <section class="productos-container">
+    <article class="producto">
+      <img src="{% static 'tienda/img/escritorio-de-oficina-forma-l.jpg' %}" alt="Mesa de trabajo ergonómica" />
+      <h2>Mesa de trabajo ergonómica</h2>
+      <p>Diseñada para optimizar tu espacio y cuidar tu postura mientras usás tus dispositivos tecnológicos.</p>
+      <div class="precio">$180,000 ARS</div>
+      <a href="#" class="btn-comprar">Comprar</a>
+    </article>
+
+    <article class="producto">
+      <img src="{% static 'tienda/img/escritorio-gamer.jpg' %}" alt="Escritorio Gamer" />
+      <h2>Escritorio Gamer</h2>
+      <p>Amplio espacio para 2 monitores.</p>
+      <div class="precio">$300,000 ARS</div>
+      <a href="#" class="btn-comprar">Comprar</a>
+    </article>
+
+    <article class="producto">
+      <img src="{% static 'tienda/img/Silla-Gamer-Xtrike-Me-GC-907-Negro-Rgb_45872_1.jpeg' %}" alt="Silla Gamer" />
+      <h2>Silla gaming</h2>
+      <p>Comodidad y soporte para largas sesiones de trabajo o juego, con diseño moderno y funcional.</p>
+      <div class="precio">$240,000 ARS</div>
+      <a href="#" class="btn-comprar">Comprar</a>
+    </article>
+
+    <article class="producto">
+      <img src="{% static 'tienda/img/silla-pc-gamer-targa-warrior-pro-fx-roja-rgb.jpg' %}" alt="Silla Gamer 2" />
+      <h2>Silla Gamer</h2>
+      <p>Regulá la altura para evitar molestias y aumentar tu comodidad.</p>
+      <div class="precio">$200,500 ARS</div>
+      <a href="#" class="btn-comprar">Comprar</a>
+    </article>
+
+    <article class="producto">
+      <img src="{% static 'tienda/img/238624-1200-auto-d719ec0fea222e314517455045096904-1024-1024.png' %}" alt="Silla Gamer 3" />
+      <h2>Silla Gamer</h2>
+      <p>Mantené tu comodidad, regulable en altura y con reposapiés incluido.</p>
+      <div class="precio">$150,000 ARS</div>
+      <a href="#" class="btn-comprar">Comprar</a>
+    </article>
+
+    <article class="producto">
+      <img src="{% static 'tienda/img/D_NQ_NP_600993-MLA84245457167_042025-O.webp' %}" alt="Escritorio en L 2" />
+      <h2>Escritorio en L</h2>
+      <p>Escritorio moderno con puertos USB para conectar y cargar tus dispositivos cómodamente.</p>
+      <div class="precio">$290,000 ARS</div>
+      <a href="#" class="btn-comprar">Comprar</a>
+    </article>
+  </section>
+</body>
+</html>

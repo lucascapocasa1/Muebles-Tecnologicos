@@ -1,0 +1,14 @@
+<h2>Productos guardados en Firebase</h2>
+
+{% if productos %}
+    <ul>
+    {% for p in productos %}
+        <li>
+            <strong>{{ p.nombre }}</strong> – {{ p.descripcion }} –
+            Precio: ${{ p.precio }} – Stock: {{ p.stock }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay productos cargados aún.</p>
+{% endif %}
