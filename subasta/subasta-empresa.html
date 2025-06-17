@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Subastas - Empresa</title>
+    <link rel="stylesheet" href="{% static 'subasta.css' %}">
+</head>
+<body>
+
+    <!-- Encabezado profesional -->
+    <header class="empresa-header">
+        <div class="container">
+            <h1 class="empresa-titulo"> Subastas Abiertas</h1>
+            <p class="empresa-subtitulo">Seleccioná pedidos y realizá tu mejor oferta</p>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Filtros -->
+            <section class="filters-section">
+                <div class="filter-card">
+                    <h3>Filtrar Pedidos</h3>
+                    <div class="filter-grid">
+                        <div class="filter-group">
+                            <label for="categoria">Categoría:</label>
+                            <select id="categoria" name="categoria">
+                                <option value="">Todas las categorías</option>
+                                <option value="escritorios">Escritorios</option>
+                                <option value="sillas">Sillas</option>
+                                <option value="estanterias">Estanterías</option>
+                                <option value="mesas">Mesas</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="precio-max">Precio máximo:</label>
+                            <input type="number" id="precio-max" name="precio-max" placeholder="$0">
+                        </div>
+                        <div class="filter-group">
+                            <label for="tiempo-entrega">Tiempo de entrega:</label>
+                            <select id="tiempo-entrega" name="tiempo-entrega">
+                                <option value="">Cualquier tiempo</option>
+                                <option value="7">Hasta 7 días</option>
+                                <option value="15">Hasta 15 días</option>
+                                <option value="30">Hasta 30 días</option>
+                            </select>
+                        </div>
+                        <button class="filter-btn">Aplicar Filtros</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pedidos abiertos -->
+            <section class="auction-requests">
+                <div class="section-header">
+                    <h3>Pedidos Abiertos</h3>
+                    <span class="requests-count">12 pedidos disponibles</span>
+                </div>
+
+                <div class="requests-grid">
+                    <!-- Aquí se cargan dinámicamente las cards de pedidos -->
+                    <!-- Cada card debe tener el formato compatible con el JS -->
+                    <!-- Ejemplo de tarjeta (pueden cargarse desde Django) -->
+
+                    <div class="request-card" data-request-id="1">
+                        <div class="request-header">
+                            <div class="request-id">#REQ-001</div>
+                            <div class="request-status status-open">Abierto</div>
+                        </div>
+                        <div class="request-content">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x200/8bc34a/ffffff?text=Escritorio+Tech" alt="Producto">
+                            </div>
+                            <div class="request-details">
+                                <h4>Escritorio Ejecutivo</h4>
+                                <p class="description">Diseño moderno con cargadores USB y compartimento de cables.</p>
+                                <div class="specs">
+                                    <span class="spec">📐 160x80x75cm</span>
+                                    <span class="spec">🎨 Madera + Metal</span>
+                                    <span class="spec">⚡ Tecnología integrada</span>
+                                </div>
+                                <div class="price-range">
+                                    <span class="price-label">Rango de precio:</span>
+                                    <span class="price">$800 - $1,200</span>
+                                </div>
+                                <div class="deadline">
+                                    <span class="deadline-label">⏰ Cierre:</span>
+                                    <span class="deadline-time">15 Jun 2025, 18:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-actions">
+                            <div class="current-bids">
+                                <span class="bids-count">3 ofertas</span>
+                                <span class="best-bid">Mejor: $750</span>
+                            </div>
+                            <button class="bid-btn" onclick="abrirModalOferta(1)">Hacer Oferta</button>
+                        </div>
+                    </div>
+                    <!-- Más cards similares se renderizarán desde Django -->
+                </div>
+            </section>
+
+            <!-- Ofertas realizadas por la empresa -->
+            <section class="my-bids-section">
+                <div class="section-header">
+                    <h3>Mis Ofertas</h3>
+                    <button class="toggle-btn" onclick="toggleMyBids()">Mostrar/Ocultar</button>
+                </div>
+                <div class="my-bids-container" id="myBidsContainer">
+                    <div class="bid-item">
+                        <div class="bid-info">
+                            <span class="bid-request">#REQ-001</span>
+                            <span class="bid-amount">$750</span>
+                            <span class="bid-status status-leading">Tu oferta es la mejor</span>
+                        </div>
+                        <div class="bid-details">
+                            <span class="bid-date">Ofertado: 8 Jun 2025</span>
+                            <button class="edit-bid-btn" onclick="abrirModalOferta(1)">Editar Oferta</button>
+                        </div>
+                    </div>
+
+                    <div class="bid-item">
+                        <div class="bid-info">
+                            <span class="bid-request">#REQ-005</span>
+                            <span class="bid-amount">$320</span>
+                            <span class="bid-status status-outbid">Otra empresa ofertó mejor</span>
+                        </div>
+                        <div class="bid-details">
+                            <span class="bid-date">Ofertado: 7 Jun 2025</span>
+                            <button class="edit-bid-btn" onclick="abrirModalOferta(5)">Nueva Oferta</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para hacer oferta -->
+    <div id="bidModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Hacer Oferta</h3>
+                <span class="close" onclick="cerrarModalOferta()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="bidForm">
+                    <div class="form-group">
+                        <label for="bidPrice">Precio ofertado ($):</label>
+                        <input type="number" id="bidPrice" name="bidPrice" step="0.01" required>
+                        <small class="price-hint">Debe ser menor al máximo indicado por el cliente</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="materials">Materiales propuestos:</label>
+                        <textarea id="materials" name="materials" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="deliveryTime">Tiempo de entrega (días):</label>
+                        <input type="number" id="deliveryTime" name="deliveryTime" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="warranty">Garantía ofrecida (meses):</label>
+                        <input type="number" id="warranty" name="warranty" min="1" max="60" value="12">
+                    </div>
+                    <div class="form-group">
+                        <label for="additionalDetails">Detalles adicionales:</label>
+                        <textarea id="additionalDetails" name="additionalDetails" rows="4"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="cerrarModalOferta()">Cancelar</button>
+                        <button type="submit" class="submit-btn">Enviar Oferta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor de notificaciones -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="{% static 'js/subasta.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subasta</title>
+  <link rel="stylesheet" href="estilos.css"> <!-- Usa tu CSS ya existente -->
+</head>
+<body>
+  <header>
+    <!-- Puedes copiar el header de tu indexCorregido.html -->
+    <h1>Subasta Activa</h1>
+  </header>
+
+  <main class="contenedor-subasta">
+    <!-- DATOS DEL PRODUCTO EN SUBASTA -->
+    <section class="info-subasta">
+      <img src="img/producto-ejemplo.jpg" alt="Producto en subasta">
+      <div class="detalle">
+        <h2>Nombre del producto</h2>
+        <p>Publicado por: <strong>Nombre de la empresa</strong></p>
+        <p>Descripción: Lorem ipsum dolor sit amet...</p>
+        <p>Precio inicial: $5000</p>
+        <p>Subasta finaliza en: <span id="tiempo-restante">00:10:00</span></p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PARA OFERTAR -->
+    <section class="ofertar">
+      <h3>Hacer una oferta</h3>
+      <p>Oferta actual más alta: <strong id="oferta-maxima">$5000</strong></p>
+      <input type="number" id="nueva-oferta" placeholder="Ingresa tu oferta">
+      <button onclick="enviarOferta()">Ofertar</button>
+      <p id="mensaje-oferta"></p>
+    </section>
+
+    <!-- HISTORIAL DE OFERTAS -->
+    <section class="historial">
+      <h3>Historial de ofertas</h3>
+      <ul id="lista-ofertas">
+        <!-- Las ofertas se agregan aquí dinámicamente -->
+      </ul>
+    </section>
+  </main>
+
+  <script src="subasta.js"></script>
+</body>
+</html>
