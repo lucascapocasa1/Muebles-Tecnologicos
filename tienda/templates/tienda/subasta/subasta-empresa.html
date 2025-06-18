@@ -37,8 +37,12 @@
                             </select>
                         </div>
                         <div class="filter-group">
-                            <label for="precio-max">Precio máximo:</label>
-                            <input type="number" id="precio-max" name="precio-max" placeholder="$0">
+                            <label for="estado">Estado:</label>
+                            <select id="estado" name="estado">
+                                <option value="">Todos</option>
+                                <option value="abierto">Abierto</option>
+                                <option value="urgente">Urgente</option>
+                            </select>
                         </div>
                         <div class="filter-group">
                             <label for="tiempo-entrega">Tiempo de entrega:</label>
@@ -111,7 +115,7 @@
                     <h3>Mis Ofertas</h3>
                     <button class="toggle-btn" onclick="toggleMyBids()">Mostrar/Ocultar</button>
                 </div>
-                <div class="my-bids-container" id="myBidsContainer">
+                <div class="my-bids-container" id="myBidsContainer" style="display: none;">
                     <div class="bid-item">
                         <div class="bid-info">
                             <span class="bid-request">#REQ-001</span>
@@ -120,7 +124,7 @@
                         </div>
                         <div class="bid-details">
                             <span class="bid-date">Ofertado: 8 Jun 2025</span>
-                            <button class="edit-bid-btn" onclick="abrirModalOferta(1)">Editar Oferta</button>
+                            <button class="edit-bid-btn" onclick="abrirModalOferta(1)">Editar mi oferta</button>
                         </div>
                     </div>
 
@@ -132,7 +136,7 @@
                         </div>
                         <div class="bid-details">
                             <span class="bid-date">Ofertado: 7 Jun 2025</span>
-                            <button class="edit-bid-btn" onclick="abrirModalOferta(5)">Nueva Oferta</button>
+                            <button class="edit-bid-btn" onclick="abrirModalOferta(5)">Editar mi oferta</button>
                         </div>
                     </div>
                 </div>
@@ -182,6 +186,6 @@
     <!-- Contenedor de notificaciones -->
     <div id="notificationContainer" class="notification-container"></div>
 
-    <script src="{% static 'js/subasta.js' %}"></script>
+    <script src="{% static 'subasta.js' %}"></script>
 </body>
 </html>

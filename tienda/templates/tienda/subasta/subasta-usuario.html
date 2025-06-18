@@ -81,25 +81,32 @@
           
           <div class="form-row">
             <div class="form-group">
-              <label for="productDimensions">Dimensiones</label>
+              <label for="productDimensions">Dimensiones (Largo x Ancho x Alto en cm) *</label>
               <input type="text" id="productDimensions" name="productDimensions" 
-                     placeholder="Ej: 200x180x40cm">
+                     placeholder="Ej: 200x180x40" required pattern="[0-9]+x[0-9]+x[0-9]+" 
+                     title="Formato: 200x180x40 (solo números y la letra x)">
             </div>
             <div class="form-group">
-              <label for="productColor">Color/Acabado</label>
-              <input type="text" id="productColor" name="productColor" 
-                     placeholder="Ej: Negro mate, Madera natural...">
+              <label for="woodType">Tipo de Madera *</label>
+              <select id="woodType" name="woodType" required>
+                <option value="">Seleccionar tipo de madera</option>
+                <option value="pino" data-price="150">Pino - $150/cm³</option>
+                <option value="eucalipto" data-price="200">Eucalipto - $200/cm³</option>
+                <option value="roble" data-price="450">Roble - $450/cm³</option>
+                <option value="cedro" data-price="380">Cedro - $380/cm³</option>
+                <option value="algarrobo" data-price="420">Algarrobo - $420/cm³</option>
+                <option value="lapacho" data-price="520">Lapacho - $520/cm³</option>
+                <option value="paraiso" data-price="280">Paraíso - $280/cm³</option>
+                <option value="quebracho" data-price="600">Quebracho - $600/cm³</option>
+              </select>
             </div>
           </div>
           
-          <div class="form-row">
-            <div class="form-group">
-              <label for="minPrice">Precio Mínimo ($) *</label>
-              <input type="number" id="minPrice" name="minPrice" min="1" required>
-            </div>
-            <div class="form-group">
-              <label for="maxPrice">Precio Máximo ($) *</label>
-              <input type="number" id="maxPrice" name="maxPrice" min="1" required>
+          <div class="form-group">
+            <label>Precio Estimado</label>
+            <div id="priceCalculation" style="padding: 15px; background: #f0f8f0; border-radius: 8px; margin-top: 10px;">
+              <div id="volumeDisplay" style="color: #666; margin-bottom: 5px;">Volumen: - cm³</div>
+              <div id="priceDisplay" style="color: #4caf50; font-weight: bold; font-size: 1.2em;">Precio estimado: $0</div>
             </div>
           </div>
           
